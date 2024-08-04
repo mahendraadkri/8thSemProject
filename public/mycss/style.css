@@ -1,0 +1,23 @@
+
+    .navbar{
+        background-color: rgb(15, 15, 90);
+        padding: 12px;
+    }
+    .menu{
+        text-align: right;
+    }
+    .menu li{
+        display: inline;
+        margin: 10px;
+    }
+
+    .menu a{
+        text-decoration: none;
+        color: white;
+        font-size: 30px;
+    }
+    .footer{
+        background-color: rgb(60, 8, 132);
+        color: white;
+    }
+    
