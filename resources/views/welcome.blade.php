@@ -1,6 +1,31 @@
 @extends('master')
 @section('content')
     
+<h2 class="font-bold text-4xl text-center my-5">Our Category</h2>
+<div class="grid grid-cols-4 gap-10 px-24 mb-10">
+
+    @foreach($categories as $category)
+    <a href="{{ route('categoryproduct', $category->id) }}">
+        <div class="bg-gray-100 rounded-lg shadow-lg relative">
+            @if($category->picture)
+                <img src="{{ asset('uploads/categories/' . $category->picture) }}" alt="{{ $category->name }}" class="w-full h-72 object-cover rounded-t-lg">
+            @else
+                <img src="{{ asset('images/default.png') }}" alt="Default Image" class="w-full h-72 object-cover rounded-t-lg">
+            @endif
+            <div class="p-2">
+                <p class="font-bold text-2xl text-center">{{ $category->name }}</p>
+            </div>
+        </div>
+    </a>
+    @endforeach
+    {{-- <div class="mx-24 my-10">
+        {{$categories->links()}}
+    </div> --}}
+</div>
+
+
+
+
 
 <h2 class="font-bold text-4xl text-center my-5">Our Products</h2>
 

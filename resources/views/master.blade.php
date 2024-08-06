@@ -21,14 +21,14 @@
 
 </head>
 
-<body class="bg-cyan-400">
-  <div class="flex px-24 justify-between bg-gray-300 p-2 text-lg">
+<body class="bg-gray-400">
+  <div class="flex px-24 justify-between bg-gray-900 p-2 text-lg text-white">
     <span>Ph: 9866666666</span>
     
     @if(auth()->user())
         <div class="flex flex-row items-center gap-4 relative">
             <button onclick="showdialog()">{{auth()->user()->name}}</button> 
-            <div class="absolute top-8 bg-cyan-400 p-4 " id="userdialog" style="display:none">
+            <div class="absolute top-8 bg-green-400 p-4 " id="userdialog" style="display:none">
         
                 <p class="mb-4">
                   <a href="myprofile" class="text-neutral-600 "
@@ -41,7 +41,7 @@
               
 
             </div>
-            <form class="inline" action="{{route('logout')}}" method="POST">
+            <form class="inline bg-green-400" action="{{route('logout')}}" method="POST">
                 @csrf
                 <button type="submit"> Logout</button>
             </form>
@@ -50,7 +50,7 @@
         </div>
         @else
         
-        <span><a href="{{route('userlogin')}}" class="bg-cyan-400 text-white font-[Poppins] duration-500 px-6 py-2 mx-4 hover:bg-cyan-500 rounded ">Login/Register</a></span>
+        <span><a href="{{route('userlogin')}}" class="bg-green-400 text-white font-[Poppins] duration-500 px-6 py-2 mx-4 hover:bg-green-800 rounded ">Login/Register</a></span>
     @endif
 </div>
 <script>
@@ -64,22 +64,22 @@
   }
 }
 </script>
-  <nav class="p-5 bg-white shadow md:flex md:items-center md:justify-between">
+  <nav class="p-5 bg-gray-500 shadow md:flex md:items-center md:justify-between">
     <div class="flex justify-between items-center ">
-      <span class="text-2xl font-[Poppins] cursor-pointer">
-        <img class="h-10 inline"
+      <span class="text-2xl font-[Poppins] cursor-pointer text-gray-200">
+        <img class="h-10 inline "
           src="{{asset('images\logo.png')}}">
         Online Electronic Store
       </span>
       {{-- search --}}
       <form action="{{url('search')}}" method="GET" role="search">
         @csrf
-        <div class="input-group">
-          <input type="search" name="search" value="{{Request::get('search')}}" placeholder="Search Products" class="form-control"/>
-          <button class="btn bg-white" type="submit">
-            <i class="fa fa-search"></i>
+        <div class="input-group ">
+          <input type="search" name="search" value="{{Request::get('search')}}" placeholder="Search Products" class="form-control bg-gray-700 border-gray-900 rounded-md text-white"/>
+          <button class="btn bg-gray-700 rounded-full" type="submit">
+            <i class="fa fa-search "></i>
           </button>
-          </div>
+        </div>
       </form>
 
       <span class="text-3xl cursor-pointer mx-2 md:hidden block">
@@ -87,21 +87,21 @@
       </span>
     </div>
 
-    <ul class="md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-white w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
+    <ul class="md:flex md:items-center z-[-1] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500 bg-gray-500 text-white">
       <li class="mx-4 my-6 md:my-0">
-        <a href="/" class="text-xl hover:text-cyan-500 duration-500">HOME</a>
+        <a href="/" class="text-xl hover:text-green-500 duration-500">HOME</a>
       </li>
        @foreach($categories as $category)
             <li class="mx-4 my-6 md:my-0 text-xl hover:text-cyan-500 duration-500"><a href="{{route('categoryproduct',$category->id)}}">{{$category->name}}</a></li>
       @endforeach
-        
+      
 
       
   <h2 class=""></h2>
     </ul>
   </nav>
 
-  <style>
+  {{-- <style>
     .carousel {
     width: 100%;
     overflow: hidden;
@@ -260,13 +260,13 @@
       let list = document.querySelector('ul');
       e.name === 'menu' ? (e.name = "close",list.classList.add('top-[80px]') , list.classList.add('opacity-100')) :( e.name = "menu" ,list.classList.remove('top-[80px]'),list.classList.remove('opacity-100'))
     }
-  </script>
+  </script> --}}
    @yield('content')
 
 
    <!-- Footer container -->
 <footer
-class="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left">
+class="bg-neutral-100 text-center text-neutral-600 dark:bg-gray-900 dark:text-neutral-200 lg:text-left">
 <div
   class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-500 lg:justify-between">
   <div class="mr-12 hidden lg:block">

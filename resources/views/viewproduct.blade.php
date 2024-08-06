@@ -29,8 +29,8 @@
             
                 <div class="mt-14">
                     <input type="hidden" name="product_id" value="{{$product->id}}">
-                    <button type="submit" class="bg-indigo-700 text-white px-6 py-2 rounded-lg shadow hover:text-black rounded">Add to Cart</button>
-                    <button type="button" class="bg-red-600 text-white px-6 py-2 rounded-lg shadow hover:text-black rounded" onclick="wishlist({{$product->id}})">Add to Wishlist</button>
+                    <button type="submit" class="bg-indigo-700 text-white px-6 py-2  shadow hover:text-black rounded">Add to Cart</button>
+                    <button type="button" class="bg-red-600 text-white px-6 py-2  shadow hover:text-black rounded" onclick="wishlist({{$product->id}})">Add to Wishlist</button>
                 </div>
             </form>
             

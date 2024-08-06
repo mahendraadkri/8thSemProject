@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(16);
         return view('category.index',compact('categories'));
     }
 
@@ -24,8 +24,25 @@ class CategoryController extends Controller
          //dd($request->name); it print the single data..
         $data = $request->validate([
             'name'=> 'required|string|max:255|unique:categories',
-            'priority'=>'required|numeric|min:1|unique:categories,priority'
+            'priority'=>'required|numeric|min:1|unique:categories,priority',
+            'picture' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
         ]);
+
+        // check if a picture was uploaded
+        if ($request->hasFile('picture')) {
+            // Generate a unique file name based on the current timestamp and the file extension
+        $fileName = time() . '.' . $request->picture->extension();
+
+        // Move the uploaded file to the public/uploads/categories directory
+        $request->picture->move(public_path('uploads/categories'), $fileName);
+
+        // Add the file name to the validated data array
+        $data['picture'] = $fileName;
+        }
+
+        //create a new category with the validated data
+        Category::create($data);
+        
         //dd($data); print data
         Category::create($data);
         return redirect(route('category.index'))->with('success','Category created successfully!');
