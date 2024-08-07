@@ -18,31 +18,32 @@
         <script src = "{{asset('datatable/datatables.js')}}"></script>
     
     </head>
-    <body class="font-sans antialiased">
-        <div class="flex">
-            <div class="w-56 fixed top-0 left-0 bottom-0 bg-gray-200 shadow-lg shadow-red-300">
+    <body class="font-sans antialiased bg-gray-900">
+        <div class="flex  ">
+            <div class="w-56 fixed top-0 left-0 bottom-0 shadow-lg shadow-red-300 bg-gray-600">
                 <img class="h-20 inline" src="images\logo.png">
+                
 
-                <h3>Hello, {{auth()->user()->role}}</h3>
+                {{-- <h3 class="text-gray-300">Hello, {{auth()->user()->role}}</h3> --}}
 
            
-            <a href="dashboard" class="text-x1 font-bold border-b-2 border-blue-500 block ml-4 px-2 py-1 hover:bg-blue-500 hover:text-white">Dashbord</a>
+            <a href="dashboard" class="text-x1 text-gray-300 font-bold border-b-2 border-gray-500 block ml-4 px-2 py-1 hover:bg-green-700 hover:text-white ">Dashbord</a>
 
-            <a href="{{route('category.index')}}" class="text-x1 font-bold border-b-2 border-blue-500 block ml-4 px-2 py-1 hover:bg-blue-500 hover:text-white">Category</a>
+            <a href="{{route('category.index')}}" class="text-x1 text-gray-300 font-bold border-b-2 border-gray-500 block ml-4 px-2 py-1 hover:bg-green-700 hover:text-white">Category</a>
 
-            <a href="{{route('contact.index')}}" class="text-x1 font-bold border-b-2 border-blue-500 block ml-4 px-2 py-1 hover:bg-blue-500 hover:text-white">Contact</a>
+            <a href="{{route('contact.index')}}" class="text-x1 text-gray-300 font-bold border-b-2 border-gray-500 block ml-4 px-2 py-1 hover:bg-green-700 hover:text-white">Contact</a>
 
-            <a href="{{route('product.index')}}" class="text-x1 font-bold border-b-2 border-blue-500 block ml-4 px-2 py-1 hover:bg-blue-500 hover:text-white">Product</a>
+            <a href="{{route('product.index')}}" class="text-x1 text-gray-300 font-bold border-b-2 border-gray-500 block ml-4 px-2 py-1 hover:bg-green-700 hover:text-white">Product</a>
 
-            <a href="{{route('user.index')}}" class="text-x1 font-bold border-b-2 border-blue-500 block ml-4 px-2 py-1 hover:bg-blue-500 hover:text-white">Users</a>
+            <a href="{{route('user.index')}}" class="text-x1 text-gray-300 font-bold border-b-2 border-gray-500 block ml-4 px-2 py-1 hover:bg-green-700 hover:text-white">Users</a>
 
-            <a href="{{route('order.index')}}" class="text-x1 font-bold border-b-2 border-blue-500 block ml-4 px-2 py-1 hover:bg-blue-500 hover:text-white">Order</a>
+            <a href="{{route('order.index')}}" class="text-x1 text-gray-300 font-bold border-b-2 border-gray-500 block ml-4 px-2 py-1 hover:bg-green-700 hover:text-white">Order</a>
 
-            <a href="{{route('rating.index')}}" class="text-x1 font-bold border-b-2 border-blue-500 block ml-4 px-2 py-1 hover:bg-blue-500 hover:text-white">Ratings</a>
+            <a href="{{route('rating.index')}}" class="text-x1 text-gray-300 font-bold border-b-2 border-gray-500 block ml-4 px-2 py-1 hover:bg-green-700 hover:text-white">Ratings</a>
 
             <form action="{{route('logout')}}" method="POST">
                 @csrf
-                <input type="submit" value="LogOut" class="text-x1 font-bold border-b-2 border-blue-500 block ml-4 px-2 py-1 hover:bg-red-600 hover:text-white">
+                <input type="submit" value="LogOut" class="text-x1 text-gray-300 font-bold border-b-2 border-gray-500 block ml-4 px-2 py-1 hover:bg-red-700 hover:text-white">
             </form>
 
             

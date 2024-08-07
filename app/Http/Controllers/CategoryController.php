@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Spatie\Backtrace\File;
 
 class CategoryController extends Controller
 {
@@ -25,24 +26,18 @@ class CategoryController extends Controller
         $data = $request->validate([
             'name'=> 'required|string|max:255|unique:categories',
             'priority'=>'required|numeric|min:1|unique:categories,priority',
-            'picture' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'picture' => 'required|image|mimes:jpeg,png,gif|max:2048',
         ]);
 
-        // check if a picture was uploaded
-        if ($request->hasFile('picture')) {
-            // Generate a unique file name based on the current timestamp and the file extension
-        $fileName = time() . '.' . $request->picture->extension();
-
-        // Move the uploaded file to the public/uploads/categories directory
-        $request->picture->move(public_path('uploads/categories'), $fileName);
-
-        // Add the file name to the validated data array
-        $data['picture'] = $fileName;
-        }
-
-        //create a new category with the validated data
-        Category::create($data);
+            if($request->hasFile('picture')){
+                $image = $request->file('picture');
+                $name = time().'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path('/images/category');
+                $image->move($destinationPath,$name);
+                $data['picture'] = $name;
+            }
         
+       
         //dd($data); print data
         Category::create($data);
         return redirect(route('category.index'))->with('success','Category created successfully!');
@@ -56,8 +51,18 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'priority' => 'required|numeric'
+            'priority' => 'required|numeric',
+            'picture' => 'required|image|mimes:jpeg,png,gif|max:2048',
         ]);
+
+        if($request->hasFile('picture')){
+            $image = $request->file('picture');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/category');
+            $image->move($destinationPath,$name);
+            // File::delete(public_path('/images/category/'.$category->picture));
+            $data['picture'] = $name;
+        }
 
         $category = Category::find($id);
         $category->update($data);

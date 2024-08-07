@@ -1,19 +1,24 @@
 @extends('layouts.app')
 @section('content')
-<h2 class="font-bold text-4xl text-blue-700">Add Category</h2>
+<h2 class="font-bold text-4xl text-green-700">Add Category</h2>
 <hr class="h-1 bg-blue-200">
 
-<form action="{{route('category.store')}}" method="POST" class="mt-5" >
+<form action="{{route('category.store')}}" method="POST" enctype="multipart/form-data" class="mt-5" >
     @csrf
-    <input type="text" placeholder="Category Name" name="name" class="w-full rounded-lg border-gray-300 my-2" value="{{old('name')}}">
+    <input type="text" placeholder="Category Name" name="name" class="w-full rounded-lg bg-gray-300 border-gray-300 my-2 " value="{{old('name')}}">
     @error('name')
     <p class="text-red-600 text-xs -mt-2">{{$message}}</p>
     @enderror
         
     
-    <input type="text" placeholder="Priority" name="priority" class="w-full rounded-lg border-gray-300 my-2" value="{{old('priority')}}">
+    <input type="text" placeholder="Priority" name="priority" class="w-full rounded-lg bg-gray-300 border-gray-300 my-2" value="{{old('priority')}}">
     @error('priority')
     <p class="text-red-600 text-xs -mt-2">{{$message}}</p>
+    @enderror
+
+    <input type="file" name="picture" class="w-full rounded-lg border-gray-300 my-2">
+    @error('picture')
+        <p class="text-red-600 text-xs -mt-2">{{$message}}</p>
     @enderror
 
     <div class="flex">

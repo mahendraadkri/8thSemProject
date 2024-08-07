@@ -10,7 +10,7 @@
             <p class="text-red-600 text-xs -mt-2">{{$message}}</p>
         @enderror
             <input type="password" name="password" id="password" placeholder="Password" class="w-full px-2 rounded-lg  my-4">
-            <input type="submit" value="Login" class="w-1/2 block p-2 rounded-lg mx-auto my-4 bg-indigo-600 text-white">
+            <input type="submit" value="Login" class="w-1/2 block p-2 rounded-lg mx-auto my-4 bg-green-400  text-white">
             <a href="{{route('user.register')}}" class="text-gray-300">Don't have account!! Register Here</a>
             <a href="{{route('password.request')}}" class="mx-4 text-gray-300">forget password</a>
         </form>
