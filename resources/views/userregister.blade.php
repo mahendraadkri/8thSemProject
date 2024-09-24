@@ -5,11 +5,11 @@
         <h2 class="font-bold text-4xl text-center my-4">Register</h2>
         <form action="{{route('user.store')}}" method="POST">
             @csrf
-            <input type="text" name="name" placeholder="Enter Name" class="w-full px-2 rounded-lg  my-4">
+            <input type="text" name="name" value="{{old('name')}}" placeholder="Enter Name" class="w-full px-2 rounded-lg  my-4">
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
-            <input type="text" name="phone" placeholder="Enter Phone" class="w-full px-2 rounded-lg  my-4">
+            <input type="text" name="phone" placeholder="Enter Phone" value="{{old('phone')}}" class="w-full px-2 rounded-lg  my-4">
             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-            <input type="text" name="address" placeholder="Enter Address" class="w-full px-2 rounded-lg  my-4">
+            <input type="text" name="address" placeholder="Enter Address" value="{{old('address')}}" class="w-full px-2 rounded-lg  my-4">
             <input type="text" name="email" placeholder="Email" class="w-full px-2 rounded-lg  my-4">
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
             <input type="password" name="password" placeholder="Password" class="w-full px-2 rounded-lg  my-4">

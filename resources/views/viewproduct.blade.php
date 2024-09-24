@@ -9,7 +9,7 @@
 
     <div class="grid grid-cols-3 px-44 gap-10 my-10">
         <div>
-            <img src="{{asset('images/products/'.$product->photopath)}}" alt="" class="w-full h-96 object-cover rounded-lg">
+            <img src="{{asset('images/products/'.$product->photopath)}}" alt="" class="w-full h-96 object-content rounded-lg">
         </div>
         <div class="border-l-2 px-2 col-span-2">
             <h2 class="text-3xl">{{$product->name}}</h2>
@@ -17,13 +17,13 @@
             <p class="text-red-700 line-through text-lg">Rs. {{$product->oldprice}}/-</p>
             @endif
             <p class="text-red-700 text-2xl font-bold">Rs. {{$product->price}}/-</p>
-            <p>Quantity</p>
+            <p class="font-bold text-blue-900">Quantity:</p>
             <form action="{{route('cart.store')}}" method="POST">
                 @csrf
                 <div class="mt-4 flex items-center">
-                    <span class="bg-gray-200 px-4 py-2 font-bold text-xl decrease-quantity">-</span>
+                    <span class="bg-gray-200 px-4 py-2 font-bold text-xl decrease-quantity cursor-pointer">-</span>
                     <input class="h-11 w-12 px-0 text-center border-0 bg-gray-100" type="number" name="qty" value="1" readonly>
-                    <span class="bg-gray-200 px-4 py-2 font-bold text-xl increase-quantity">+</span>
+                    <span class="bg-gray-200 px-4 py-2 font-bold text-xl increase-quantity cursor-pointer">+</span>
                 </div>
                 <p><b>In Stock:</b> {{$product->stock}}</p>
             
@@ -160,7 +160,7 @@ $.ajax({
             @foreach($relatedproducts as $relatedproduct)
             <a href="{{route('viewproduct',$relatedproduct->id)}}">
                 <div class="bg-gray-100 rounded-lg shadow-lg relative">
-                    <img src="{{asset('images/products/'.$relatedproduct->photopath)}}" alt="" class="w-full h-72 object-cover rounded-t-lg">
+                    <img src="{{asset('images/products/'.$relatedproduct->photopath)}}" alt="" class="w-full h-72 object-contant rounded-t-lg">
                     <div class="p-2">
                         <p class="font-bold text-2xl">{{$relatedproduct->name}}</p>
                         <p class="font-bold text-2xl">

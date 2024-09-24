@@ -90,10 +90,17 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $id)
+    // public function destroy(Contact $id)
+    // {
+    //     $contact = Contact::find($id);
+    //     $contact->delete();
+    //     return redirect(route('contact.index'))->with('message', 'Contact deleted successfully!');
+    // }
+
+    public function destroy(Contact $contact)
     {
-        $contact = Contact::find($id);
         $contact->delete();
-        return redirect(route('contact.index'));
+        return redirect()->route('contact.index')->with('success', 'Contact deleted successfully!');
     }
+  
 }

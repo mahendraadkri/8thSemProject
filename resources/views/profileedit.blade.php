@@ -11,11 +11,6 @@
                 
                 <form action="{{ route('profileedit.update',$user->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
-    
-                    <h1 class="mb-8 text-3xl text-center">Edit Profile</h1>
-    
-                
-    
                     <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4" name="name"
                         placeholder="Full Name"  value="{{auth()->user()->name}}" />
     

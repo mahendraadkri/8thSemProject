@@ -52,7 +52,7 @@ class CategoryController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'priority' => 'required|numeric',
-            'picture' => 'required|image|mimes:jpeg,png,gif|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
         ]);
 
         if($request->hasFile('picture')){

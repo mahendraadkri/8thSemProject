@@ -19,16 +19,16 @@
                     @csrf
                     <div class="form-group mb-6">
                         <input type="text"
-                            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="name" id="exampleInput7" placeholder="Name">
+                            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="name" id="exampleInput7" placeholder="Name" value="{{old('name', Auth::user()->name ?? '')}}">
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div class="form-group mb-6">
                         <input type="email" 
-                            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8" placeholder="Email address" name="email">
+                            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8" placeholder="Email address" name="email" value="{{ old('email', Auth::user()->email ?? '') }}">
                     </div>
                     <div class="form-group mb-6">
                         <input type="text" 
-                            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="phone" placeholder="Mobile No." name="phone">
+                            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="phone" placeholder="Mobile No." name="phone" value="{{ old('phone', Auth::user()->phone ?? '')}}">
                             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                     </div>
                     <div class="form-group mb-6">
@@ -60,8 +60,8 @@
                             </div>
                             <div class="grow ml-6">
                                 <p class="font-bold mb-1">Technical support</p>
-                                <p class="text-gray-500">oes_tc500@gmail.com.com</p>
-                                <p class="text-gray-500">9865656565</p>
+                                <p class="text-gray-500">hos_tec@gmail.com.com</p>
+                                <p class="text-gray-500">9878965412</p>
                             </div>
                         </div>
                     </div>
@@ -81,8 +81,8 @@
                             </div>
                             <div class="grow ml-6">
                                 <p class="font-bold mb-1">Sales questions</p>
-                                <p class="text-gray-500">oes_sales500@example.com</p>
-                                <p class="text-gray-500">9785412365</p>
+                                <p class="text-gray-500">hos_sq500@example.com</p>
+                                <p class="text-gray-500">9785777854</p>
                             </div>
                         </div>
                     </div>
@@ -102,8 +102,8 @@
                             </div>
                             <div class="grow ml-6">
                                 <p class="font-bold mb-1">Press</p>
-                                <p class="text-gray-500">oes_press500@gmail.com.com</p>
-                                <p class="text-gray-500">9856565656</p>
+                                <p class="text-gray-500">hos_pr@gmail.com.com</p>
+                                <p class="text-gray-500">9898563010</p>
                             </div>
                         </div>
                     </div>
@@ -123,8 +123,8 @@
                             </div>
                             <div class="grow ml-6">
                                 <p class="font-bold mb-1">Bug report</p>
-                                <p class="text-gray-500">oes_bugs500@gmail.com.com</p>
-                                <p class="text-gray-500">9852525252</p>
+                                <p class="text-gray-500">hos_bugs500@gmail.com.com</p>
+                                <p class="text-gray-500">9885623214</p>
                             </div>
                         </div>
                     </div>

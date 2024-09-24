@@ -3,7 +3,7 @@
 @include('layouts.message')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Add this to the head section of your HTML -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <h2 class="font-bold text-4xl text-blue-700">Users Ratings & Reviews</h2>
     <hr class="h-1 bg-blue-200">
@@ -21,8 +21,8 @@
             @foreach($rating as $rating)
             <tr>
                 <td>{{$rating['id']}}</td>
-                <td>{{$rating['product']['name'] }}</td>
-                <td>{{$rating['user']['email'] }}</td>
+                <td>{{$rating['product']['name'] ?? 'N/A'  }}</td>
+                <td>{{$rating['user']['email'] ?? 'N/A'  }}</td>
                 <td>{{$rating['review']}}</td>
                 <td>{{$rating['rating']}}</td>
                 <td>
@@ -38,8 +38,11 @@
         </tbody>
     </table>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).on("click", ".updateRatingStatus", function () {
+            console.log("Button clicked!"); // Add this line for debugging
             var status = $(this).children("i").attr("status");
             var rating_id = $(this).attr("rating_id");
             $.ajax({

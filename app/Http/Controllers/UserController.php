@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Mail;
@@ -33,20 +34,23 @@ class UserController extends Controller
     public function userstore(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|alpha|max:255',
+            'name' => ['required','regex:/^[\pL\s]+$/u','max:255'],
             'phone' => 'required|string|digits:10|starts_with:9',
             'email' => 'required|email:filter|unique:users,email|max:255',
             'address' => 'required',
             'password' => ['required','confirmed', Rules\Password::defaults()],
         ]);
 
+        // Hash password
         $data['password'] = Hash::make($data['password']);
         $data['role'] = 'user';
         
-        User::create($data);
+        // Create user
+        $user = User::create($data);
 
-       
-        return redirect(route('home'));
+        // login the user after register
+        Auth::login($user);
+        
         //mail after registration
         $data = [
             'name' => auth()->user()->name,
@@ -57,13 +61,15 @@ class UserController extends Controller
  			->subject('You have been successfully register');
  		});
 
+        return redirect(route('home'));
+
     }
 
     public function update(Request $request, $id)
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'phone' => 'required|numeric|max:20',
+            'phone' => 'required|digits_between:10,10',
             'address' => 'required',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
 

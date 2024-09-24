@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -18,7 +18,7 @@
         <script src = "{{asset('datatable/datatables.js')}}"></script>
     
     </head>
-    <body class="font-sans antialiased bg-gray-900">
+    <body class="font-sans antialiased bg-gray-300">
         <div class="flex  ">
             <div class="w-56 fixed top-0 left-0 bottom-0 shadow-lg shadow-red-300 bg-gray-600">
                 <img class="h-20 inline" src="images\logo.png">

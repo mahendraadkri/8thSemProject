@@ -108,7 +108,7 @@ class ProductController extends Controller
      */
     public function destroy(Request $request)
     {
-        $product = Product::find($request->dataid);
+        $product = Product::find($request->id);
         File::delete(public_path('images/products/'.$product->photopath));
         $product->delete();
         return redirect(route('product.index'))->with('success','Product Deleted Successfully');

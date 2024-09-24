@@ -14,7 +14,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Phone No.</th>
-            <th>Text</th>
+            <th>Message</th>
             <th>Time</th>
             <th>Action</th>
         </thead>
@@ -27,9 +27,16 @@
                 <td>{{$contact->phone}}</td>
                 <td>{{$contact->text}}</td>
                 <td>{{$contact->created_at}}</td>
-                <td>
+                {{-- <td>
                     <a onclick="return confirm('Are you sure you want to delete!!')" href="{{Route('contact.destroy',$contact->id)}}" class="bg-red-600 text-white px-2 py-1 rounded hover:shadow-red-400">Delete</a>
-                </td>
+                </td> --}}
+                <td>
+                    <form method="POST" action="{{ route('contact.destroy', $contact->id) }}">
+                      @csrf  
+                      @method('DELETE')
+                      <button type="submit" onclick="return confirm('Are you sure you want to delete?')" class="bg-red-600 text-white px-2 py-1 rounded hover:shadow-red-400">Delete</button>
+                    </form>
+                  </td>
                 
             </tr>
             @endforeach

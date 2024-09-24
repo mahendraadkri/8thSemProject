@@ -11,10 +11,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Online Electronic Store</title>
+<title>Hamro Departmental Store</title>
 <link rel="stylesheet" href="{{asset('mycss/style.css')}}">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<!-- Swiper.js CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+<!-- Swiper.js JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
 <script src="{{asset('datatable/jquery-3.6.0.js')}}"></script>
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @include('links.links')
@@ -69,7 +74,7 @@
       <span class="text-2xl font-[Poppins] cursor-pointer text-gray-200">
         <img class="h-10 inline "
           src="{{asset('images\logo.png')}}">
-        Online Electronic Store
+        Hamro Departmental Store
       </span>
       {{-- search --}}
       <form action="{{url('search')}}" method="GET" role="search">
@@ -91,10 +96,12 @@
       <li class="mx-4 my-6 md:my-0">
         <a href="/" class="text-xl hover:text-green-500 duration-500">HOME</a>
       </li>
-       @foreach($categories as $category)
-            <li class="mx-4 my-6 md:my-0 text-xl hover:text-cyan-500 duration-500"><a href="{{route('categoryproduct',$category->id)}}">{{$category->name}}</a></li>
-      @endforeach
-      
+      <li class="mx-4 my-6 md:my-0">
+        <a href="/aboutus" class="text-xl hover:text-green-500 duration-500">ABOUT US</a>
+      </li>
+      <li class="mx-4 my-6 md:my-0">
+        <a href="/contactus" class="text-xl hover:text-green-500 duration-500">Contact US</a>
+      </li>
 
       
   <h2 class=""></h2>
