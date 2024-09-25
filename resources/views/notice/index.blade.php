@@ -3,7 +3,7 @@
 
 @include('layouts.message')
 <h2 class="font-bold text-4xl text-blue-700">Notices</h2> 
-<hr class="h-1 bg-blue-200">
+<hr class="h-1 bg-gray-600">
 <div class="my-4 text-right px-10">
     <a href="{{route('notice.create')}}" class="bg-amber-400 text-black px-4 py-2 rounded-lg shadow-md hover:shadow-amber-300">Add Notice</a>
 </div>

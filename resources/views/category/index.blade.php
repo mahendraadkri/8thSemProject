@@ -4,7 +4,7 @@
 
 @include('layouts.message')
 <h2 class="font-bold text-4xl text-green-700">Categories</h2>
-    <hr class="h-1 bg-blue-200">
+<hr class="h-1 bg-gray-600">
 
     <div class="my-4 text-right px-10 text-gray-200">
         <a href="{{route('category.create')}}" class="bg-amber-400 text-black px-4 py-2 rounded-lg shadow-md hover:shadow-amber-300 ">Add Category</a>

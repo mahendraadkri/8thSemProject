@@ -22,6 +22,14 @@
         </a>
 
         <a href="{{ route('product.index') }}">
+            <div class="px-4 py-8 rounded-lg bg-teal-600 flex justify-between hover:bg-teal-700 hover:shadow-lg transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer hover:text-gray-200">
+                <p class="font-bold text-lg">Total Products</p>
+                <p class="font-bold text-5xl">{{$products}}</p>
+            </div>
+        </a>
+        
+
+        <a href="{{ route('order.index') }}">
             <div class="px-4 py-8 rounded-lg bg-green-600  flex justify-between  hover:bg-green-700 hover:shadow-lg transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer hover:text-gray-200">
                 <p class="font-bold text-lg">Pending Orders</p>
                 <p class="font-bold text-5xl">{{$orders}}</p>

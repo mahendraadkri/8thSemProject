@@ -31,6 +31,7 @@
                     <input type="hidden" name="product_id" value="{{$product->id}}">
                     <button type="submit" class="bg-indigo-700 text-white px-6 py-2  shadow hover:text-black rounded">Add to Cart</button>
                     <button type="button" class="bg-red-600 text-white px-6 py-2  shadow hover:text-black rounded" onclick="wishlist({{$product->id}})">Add to Wishlist</button>
+                    
                 </div>
             </form>
             
@@ -93,7 +94,7 @@ $.ajax({
     }
 
 
-    </script>
+</script>
 
     <div class="px-44 my-10">
         <h2 class="font-bold text-2xl">About this product</h2>
@@ -133,19 +134,28 @@ $.ajax({
                 </form>
             </div>
             <div class="span4">
-                <h3><b>Users Review</b></h3>
-                {{-- <div>
-
-                    @foreach ($product->ratings as $rating )
-                    <div>
-                        rating: {{$rating->rating}}
-                        review: {{$rating->review}}
-                        User: {{$rating->user->name}}
+                <h3 class="font-bold text-2xl mb-4">Users Review</h3>
+                    <div class="grid grid-cols-1 gap-6">
+                        @foreach ($product->ratings as $rating)
+                        <div class=" rounded-lg shadow-lg p-6 border border-gray-300">
+                            <div class="flex items-center mb-3">
+                                <div class="text-yellow-400 text-xl mr-2">
+                                    {{-- Display star rating dynamically based on the rating value --}}
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if($i <= $rating->rating)
+                                            <span>&#9733;</span> {{-- Filled star --}}
+                                        @else
+                                            <span class="text-gray-300">&#9733;</span> {{-- Empty star --}}
+                                        @endif
+                                    @endfor
+                                </div>
+                                <p class="text-sm text-gray-600">by <strong>{{ $rating->user->name }}</strong></p>
+                            </div>
+                            <p class="text-gray-700 mb-4"><strong>Review:</strong> {{ $rating->review }}</p>
+                        </div>
+                        @endforeach
                     </div>
-                        
-                    @endforeach
 
-                </div> --}}
                
             </div>
         </div>

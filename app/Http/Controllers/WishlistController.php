@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Wishlist;
 use App\Models\Category;
 use App\Models\Product;
@@ -100,6 +101,9 @@ class WishlistController extends Controller
    
     public function destroy($id)
     {
-        //
+        $carts = Cart::findOrFail($id);
+        $carts->delete();
+
+        return redirect()->back()->with('success','Item removed from wishlist successfully');
     }
 }

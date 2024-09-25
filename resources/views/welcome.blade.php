@@ -81,6 +81,7 @@
                     @endif
                     Rs. {{$product->price}}/-
                 </p>
+                <p><b>In Stock:</b> {{$product->stock}}</p>
             </div>
             @if($product->oldprice != '')
             @php

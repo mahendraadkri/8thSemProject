@@ -6,7 +6,7 @@
 
 
 <h2 class="font-bold text-4xl text-blue-700">Users Ratings & Reviews</h2>
-    <hr class="h-1 bg-blue-200">
+<hr class="h-1 bg-gray-600">
 
     <table id="mytable" class="display">
         <thead>

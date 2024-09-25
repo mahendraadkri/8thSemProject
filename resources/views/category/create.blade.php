@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <h2 class="font-bold text-4xl text-green-700">Add Category</h2>
-<hr class="h-1 bg-blue-200">
+<hr class="h-1 bg-gray-600">
 
 <form action="{{route('category.store')}}" method="POST" enctype="multipart/form-data" class="mt-5" >
     @csrf

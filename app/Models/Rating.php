@@ -21,4 +21,6 @@ class Rating extends Model
     {
         return $this->belongsTo('App\Models\Product','product_id');
     }
+
+    
 }

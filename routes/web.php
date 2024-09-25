@@ -18,6 +18,7 @@ use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Foundation\Application;
 use Inertia\Inertia;
 
@@ -71,7 +72,8 @@ Route::get('/dashboard', function () {
     $orders = Order::where('status','Pending')->count();
     $contacts = Contact::count();
     $users = User::count();
-    return view('dashboard',compact('categories','orders','contacts','users'));
+    $products = Product::count();
+    return view('dashboard',compact('categories','orders','contacts','users','products'));
 })->middleware(['auth', 'verified','isadmin'])->name('dashboard');
 
 
@@ -86,6 +88,10 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/myorders',[PagesController::class,'orders'])->name('user.order');
     Route::get('/mywishlist',[WishlistController::class,'index'])->name('wishlist.index');
     Route::post('/mywishlist/store',[WishlistController::class,'store'])->name('wishlist.store');
+    Route::delete('/wishlist/delete/{id}',[WishlistController::class,'destroy'])->name('wishlist.delete');
+
+    
+
 
     //route for contact admin
     Route::post('/contact/store',[ContactController::class,'store'])->name('contact.store');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,6 +81,40 @@ class UserRatingController extends Controller
        
        }
     }
+
+    public function viewProduct($id)
+    {
+        $product = Product::with('ratings.user')->find($id);
+        $relatedproducts = Product::where('category_id',$product->category_id)->where('id', '!=', $product->id)->get();
+
+        //calculate average rating
+        $averageRating = $product->ratings()->avg('rating');
+
+        return view('viewproduct',compact('product','relatedproducts','averageRating'));
+    }
+
+    public function show($id)
+{
+    // Find the product by ID
+    $product = Product::with('ratings')->find($id);
+
+    // Check if product has ratings
+    if ($product->ratings->count() > 0) {
+        // Calculate the average rating
+        $averageRating = $product->ratings->avg('rating');
+    } else {
+        $averageRating = null; // No ratings yet
+    }
+
+    // Fetch related products if necessary
+    $relatedproducts = Product::where('category_id', $product->category_id)
+                            ->where('id', '!=', $id)
+                            ->get();
+
+    // Return the view with product, averageRating, and related products
+    return view('viewproduct', compact('product', 'averageRating', 'relatedproducts'));
+}
+
 }
 
 
