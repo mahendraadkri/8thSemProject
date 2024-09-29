@@ -17,12 +17,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <!-- Swiper.js CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
 <!-- Swiper.js JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
 <script src="{{asset('datatable/jquery-3.6.0.js')}}"></script>
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @include('links.links')
+
+<script src="https://khalti.com/static/khalti-checkout.js"></script>
+
 
 </head>
 
@@ -36,26 +40,29 @@
             <div class="absolute top-8 bg-green-400 p-4 " id="userdialog" style="display:none">
         
                 <p class="mb-4">
-                  <a href="myprofile" class="text-neutral-600 "
-                    >Profile</a>
+                  <a href="myprofile" class="text-neutral-600 ">
+                    Profile</a>
                 </p>
                 <p class="mb-4">
-                  <a href="myorders" class="text-neutral-600"
-                    >My Order</a>
+                  <a href="myorders" class="text-neutral-600">
+                    My Order</a>
                 </p>
               
 
             </div>
-            <form class="inline bg-green-400" action="{{route('logout')}}" method="POST">
-                @csrf
-                <button type="submit"> Logout</button>
-            </form>
-            <a href="{{route('cart.index')}}"><x-emblem-cart style="width: 20px"/></a>
-            <a href="{{route('wishlist.index')}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
+            <form class="inline" action="{{route('logout')}}" method="POST">
+              @csrf
+              <button type="submit" class="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-500 transition-colors duration-300 cursor-pointer">
+                  Logout
+              </button>
+          </form>
+                  <a href="{{route('cart.index')}}"><x-emblem-cart class="w-6 h-6"/></a>
+                  <a href="{{route('wishlist.index')}}"><i class="fa fa-heart text-lg" aria-hidden="true"></i></a>
+
         </div>
         @else
         
-        <span><a href="{{route('userlogin')}}" class="bg-green-400 text-white font-[Poppins] duration-500 px-6 py-2 mx-4 hover:bg-green-800 rounded ">Login/Register</a></span>
+        <span><a href="{{route('userlogin')}}" class="bg-blue-500 text-white font-[Poppins] font-bold duration-500 px-6 py-2 mx-4 hover:bg-blue-800 rounded ">Login/Register</a></span>
     @endif
 </div>
 <script>
@@ -69,6 +76,7 @@
   }
 }
 </script>
+
   <nav class="p-5 bg-gray-500 shadow md:flex md:items-center md:justify-between">
     <div class="flex justify-between items-center ">
       <span class="text-2xl font-[Poppins] cursor-pointer text-gray-200">
@@ -94,13 +102,13 @@
 
     <ul class="md:flex md:items-center z-[-1] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500 bg-gray-500 text-white">
       <li class="mx-4 my-6 md:my-0">
-        <a href="/" class="text-xl hover:text-green-500 duration-500">HOME</a>
+        <a href="/" class="text-xl hover:text-blue-500 duration-500"><i class="fas fa-home mr-2"></i>HOME</a>
       </li>
       <li class="mx-4 my-6 md:my-0">
-        <a href="/aboutus" class="text-xl hover:text-green-500 duration-500">ABOUT US</a>
+        <a href="/aboutus" class="text-xl hover:text-blue-500 duration-500"><i class="fas fa-info-circle mr-2"></i>ABOUT US</a>
       </li>
       <li class="mx-4 my-6 md:my-0">
-        <a href="/contactus" class="text-xl hover:text-green-500 duration-500">Contact US</a>
+        <a href="/contactus" class="text-xl hover:text-blue-500 duration-500"><i class="fas fa-phone-alt mr-2"></i>Contact US</a>
       </li>
 
       
@@ -108,7 +116,7 @@
     </ul>
   </nav>
 
-  {{-- <style>
+  <style>
     .carousel {
     width: 100%;
     overflow: hidden;
@@ -164,11 +172,11 @@
    cover">
     </div>
     <div class="carousel-item ">
-    <img src="{{ asset('images/user/slider/slider3.jpg') }}" alt="Image 2" style="height:600px; object-fit: 
+    <img src="{{ asset('images/user/slider/slider2.jpg') }}" alt="Image 2" style="height:600px; object-fit: 
    cover">
     </div>
     <div class="carousel-item">
-    <img src="{{ asset('images/user/slider/slider2.jpg') }}" alt="Image 3" style="height:500px; object-fit: 
+    <img src="{{ asset('images/user/slider/slider3.jpg') }}" alt="Image 3" style="height:500px; object-fit: 
    cover">
     </div>
     <div class="carousel-item">
@@ -176,11 +184,11 @@
    cover">
     </div>
     <div class="carousel-item ">
-    <img src="{{ asset('images/user/slider/slider3.jpg') }}" alt="Image 2" style="height:600px; object-fit: 
+    <img src="{{ asset('images/user/slider/slider2.jpg') }}" alt="Image 2" style="height:600px; object-fit: 
    cover">
     </div>
     <div class="carousel-item">
-    <img src="{{ asset('images/user/slider/slider2.jpg') }}" alt="Image 3" style="height:500px; object-fit: 
+    <img src="{{ asset('images/user/slider/slider3.jpg') }}" alt="Image 3" style="height:500px; object-fit: 
    cover">
     </div>
     <div class="carousel-indicators">
@@ -267,8 +275,8 @@
       let list = document.querySelector('ul');
       e.name === 'menu' ? (e.name = "close",list.classList.add('top-[80px]') , list.classList.add('opacity-100')) :( e.name = "menu" ,list.classList.remove('top-[80px]'),list.classList.remove('opacity-100'))
     }
-  </script> --}}
-   @yield('content')
+  </script>
+  @yield('content')
 
 
    <!-- Footer container -->

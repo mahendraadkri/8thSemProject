@@ -28,13 +28,13 @@
         </p>
     </div>
     <div>
-        <img class="w-48 h-48 mx-4 my-2" src="{{ asset('images\logo.png') }}" alt="Hamro Store Logo">
+        <img class="w-48 h-48 mx-4 my-2" src="{{ asset('images\about.jpg') }}" alt="Hamro Store Logo">
     </div>
 </div>
 
 <div class="mt-5 ml-10 justify-items-center grid grid-cols-2">
     <div>
-        <img class="w-48 h-48 mx-4 my-2" src="{{ asset('images\team.png') }}" alt="Our Team">
+        <img class="w-48 h-48 mx-4 my-2" src="{{ asset('images\cart.jpg') }}" alt="Our Team">
     </div>
     <div>
         <h2 class="text-2xl font-bold mb-4">Why Choose Us?</h2>
@@ -50,8 +50,8 @@
 
 <div class="flex flex-wrap items-center justify-center mb-8">
     <img class="w-48 h-48 mx-4 my-2" src="{{ asset('images\about1.jpg') }}" alt="Team at Work">
-    <img class="w-48 h-48 mx-4 my-2" src="{{ asset('images\about2.jpg') }}" alt="Our Products">
-    <img class="w-48 h-48 mx-4 my-2" src="{{ asset('images\about3.jpg') }}" alt="Customer Service">
+    <img class="w-48 h-48 mx-4 my-2" src="{{ asset('images\all.jpg') }}" alt="Our Products">
+    <img class="w-48 h-48 mx-4 my-2" src="{{ asset('images\instant.png') }}" alt="Customer Service">
 </div>
 
 <p class="text-lg text-gray-700"><b>Thank you for shopping with Hamro Departmental Store. We are committed to serving you with excellence!</b></p>

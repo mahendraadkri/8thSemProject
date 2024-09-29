@@ -4,7 +4,7 @@
 
 {{-- Hello {{ $user->name }}, --}}
 
-Hello {{ $data['name'] }},
+Hello ,
 
 Congratulations! Your registration has been successful.
 

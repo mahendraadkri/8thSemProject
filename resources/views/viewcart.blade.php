@@ -19,12 +19,14 @@
       <div class="rounded-lg md:w-2/3">
         <div class="grid grid-cols-2 gap-5 px-24">
             @foreach ($carts as $cart)
-            <div class="flex bg-gray-100 my-5 rounded shadow">
-              <a href="{{route('viewproduct',$cart->product->id)}}"><img src="{{asset('images/products/'.$cart->product->photopath)}}" class="h-32 w-44 object-cover shadow-lg my-2"></a>
-                <div class="px-4 py-1">
-                    <h2 class="text-2xl font-bold">{{$cart->product->name}}</h2>
-                </div>
+            <div class=" bg-gray-100 my-5 rounded shadow">
+              <a href="{{route('viewproduct',$cart->product->id)}}"><img src="{{asset('images/products/'.$cart->product->photopath)}}" class="h-52 w-76 object-cover shadow-lg my-2"></a>
+              <div class=" py-2">
+                <h2 class="text-2xl font-bold">{{$cart->product->name}}</h2>
             </div>
+               
+            </div>
+            
             @endforeach
             </div>
       </div>

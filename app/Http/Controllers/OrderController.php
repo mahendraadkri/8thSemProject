@@ -63,18 +63,22 @@ class OrderController extends Controller
         $ids = $carts->pluck('id')->toArray();
         $data['cart_id'] = implode(',', $ids);
          
-        Order::create($data);
+        $order = Order::create($data);
         Cart::whereIn('id', $ids)->update(['is_ordered' => true]);
         
-        // mail when order is placed
-        $data = [
-            'name' => auth()->user()->name,
-            'mailmessage' => 'New Order has been placed',
-    			];
- 		Mail::send('email.email',$data, function ($message){
- 			$message->to(auth()->user()->email)
- 			->subject('New Order Placed');
- 		});
+      // Send mail when order is placed
+    $mailData = [
+        'name' => auth()->user()->name,
+        'mailmessage' => 'Your order has been successfully placed. Thank you for shopping with us!',
+        'order_id' => $order->id,
+        'total_amount' => $totalamount,
+    ];
+
+     // Use a view for the email
+     Mail::send('email.order', $mailData, function ($message) {
+        $message->to(auth()->user()->email)
+                ->subject('Order Confirmation');
+    });
 
 
         return redirect()->route('home')->with('success', 'Order has been placed successfully');
@@ -83,6 +87,7 @@ class OrderController extends Controller
 
     public function index()
     {
+        
         $orders = Order::all();
         return view('orders.index', compact('orders'));
     }
@@ -116,8 +121,25 @@ class OrderController extends Controller
     public function status($id,$status)
     {
         $order = Order::find($id);
+        // update order status
         $order->status = $status;
         $order->save();
+
+        //email to the user about the status change
+        $user = $order->user;
+         $mailData = [
+            'name' => $user->name,
+            'order_id' => $order->id,
+            'status' => $status
+        ];
+
+        //use a blade view for the email
+        Mail::send('email.orderstatus', $mailData, function ($message) use ($user, $status) {
+            $message->to($user->email)
+                    ->subject('your Order Status Change to ' . $status);
+        });
+
+
         return redirect(route('order.index'))->with('success','Status changed to '.$status);
     }
 
@@ -147,10 +169,6 @@ class OrderController extends Controller
         curl_close($ch);
 
         if ($status_code == 200) {
-            
-
-
-            
             return response()->json(([
                 'success' => 1,
                 'redirectto' => $request,
@@ -167,5 +185,19 @@ class OrderController extends Controller
 
         print_r($request);
     }
+
+
+    public function getSalesByCategory()
+        {
+            $salesByCategory = Order::join('carts', 'orders.cart_id', '=', 'carts.id')
+                ->join('products', 'carts.product_id', '=', 'products.id')
+                ->join('categories', 'products.category_id', '=', 'categories.id')
+                ->selectRaw('categories.name as category_name, SUM(carts.qty * products.price) as total_sales')
+                ->groupBy('categories.name')
+                ->get();
+
+            return view('dashboard', compact('salesByCategory'));
+        }
+
 
 }

@@ -34,33 +34,34 @@ class UserController extends Controller
     public function userstore(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required','regex:/^[\pL\s]+$/u','max:255'],
+            'name' => ['required', 'regex:/^[\pL\s]+$/u', 'max:255'],
             'phone' => 'required|string|digits:10|starts_with:9',
             'email' => 'required|email:filter|unique:users,email|max:255',
             'address' => 'required',
-            'password' => ['required','confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+    
         // Hash password
         $data['password'] = Hash::make($data['password']);
         $data['role'] = 'user';
-        
+    
         // Create user
         $user = User::create($data);
-
-        // login the user after register
+    
+        // Log in the user after registration
         Auth::login($user);
-        
-        //mail after registration
-        $data = [
-            'name' => auth()->user()->name,
-            'mailmessage' => 'You have been successfully register',
-    			];
- 		Mail::send('email.register',$data, function ($message){
- 			$message->to(auth()->user()->email)
- 			->subject('You have been successfully register');
- 		});
-
+    
+        // Send mail after registration
+        $mailData = [
+            'name' => $user->name,
+            'mailmessage' => 'You have been successfully registered.',
+        ];
+    
+        Mail::raw("Hello {$mailData['name']},\n\n{$mailData['mailmessage']}", function ($message) use ($user) {
+            $message->to($user->email)
+                    ->subject('You have been successfully registered');
+        });
+    
         return redirect(route('home'));
 
     }

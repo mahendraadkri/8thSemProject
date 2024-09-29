@@ -11,6 +11,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\UserRatingController;
@@ -66,15 +67,17 @@ Route::get('/products/{category}/{orderBy}', [ProductController::class, 'sortPro
 
 
 
-Route::get('/dashboard', function () {
+// Route::get('/dashboard', function () {
 
-    $categories = Category::count();
-    $orders = Order::where('status','Pending')->count();
-    $contacts = Contact::count();
-    $users = User::count();
-    $products = Product::count();
-    return view('dashboard',compact('categories','orders','contacts','users','products'));
-})->middleware(['auth', 'verified','isadmin'])->name('dashboard');
+//     $categories = Category::count();
+//     $orders = Order::where('status','Pending')->count();
+//     $contacts = Contact::count();
+//     $users = User::count();
+//     $products = Product::count();
+//     return view('dashboard',compact('categories','orders','contacts','users','products'));
+// })->middleware(['auth', 'verified','isadmin'])->name('dashboard');
+
+Route::get('/dashboard',[DashboardController::class, 'index'])->middleware(['auth', 'verified','isadmin'])->name('dashboard');
 
 
 
