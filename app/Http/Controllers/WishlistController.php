@@ -18,8 +18,8 @@ class WishlistController extends Controller
     public function index()
     {
         $categories = Category::orderBy('priority')->get();
-        $carts = Wishlist::where('user_id',auth()->user()->id)->get();
-        return view('viewwishlist',compact('carts','categories'));
+        $wishlists = Wishlist::with('product')->get();
+        return view('viewwishlist',compact('wishlists','categories'));
     }
 
     /**
@@ -101,8 +101,9 @@ class WishlistController extends Controller
    
     public function destroy($id)
     {
-        $carts = Cart::findOrFail($id);
-        $carts->delete();
+
+        $wishlist = Wishlist::findOrFail($id);
+        $wishlist->delete();
 
         return redirect()->back()->with('success','Item removed from wishlist successfully');
     }

@@ -20,21 +20,31 @@ class UserRatingController extends Controller
         return view('ratings.rating',compact('rating'));
     
     }
-     public function updateRatingStatus(Request $request)
+    // public function updateRatingStatus(Request $request)
+    // {
+    //     if($request->ajax()) {
+    //         $data = $request->all();
+    //         $status = $data['status'] == "Active" ? 0 : 1;
+    //         Rating::where('id', $data['rating_id'])->update(['status' => $status]);
+    //         return response()->json(['status' => $status, 'rating_id' => $data['rating_id']]);
+    //     }
+    // }
+
+    public function updateRatingStatus(Request $request)
     {
-        if($request->ajax())
-        {
-            $data = $request->all();
-            if($data['status']=="Active"){
-                $status = 0;
-            }else{
-                $status = 1;
-            }
-            Rating::where('id',$data['rating_id'])->update(['status'=>$status]);
-            return response()->json(['status'=>$status,'rating_id'=>$data['rating_id']]);
+        $rating = Rating::find($request->rating_id);
+
+        if ($rating) {
+            $status = $request->status == 'Active' ? 0 : 1; // Toggle the status
+            $rating->status = $status;
+            $rating->save();
+
+            return response()->json(['status' => $status]); // Return the updated status
         }
 
+        return response()->json(['error' => 'Rating not found'], 404);
     }
+    
 
 
 

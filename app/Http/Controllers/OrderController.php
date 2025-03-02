@@ -143,43 +143,96 @@ class OrderController extends Controller
         return redirect(route('order.index'))->with('success','Status changed to '.$status);
     }
 
+    // public function khaltiverify(Request $request)
+    // {
+
+    //     $args = http_build_query(array(
+    //         'token' => $request->_token,
+    //         'amount'  => 1000
+    //     ));
+
+    //     $url = "https://khalti.com/api/v2/payment/verify/";
+
+    //     # Make the call using API.
+    //     $ch = curl_init();
+    //     curl_setopt($ch, CURLOPT_URL, $url);
+    //     curl_setopt($ch, CURLOPT_POST, 1);
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    //     $headers = ['Authorization: Key test_secret_key_56ee94c2db46440a9340fb8ec45cccc0'];
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    //     // Response
+    //     $response = curl_exec($ch);
+    //     $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    //     curl_close($ch);
+
+    //     if ($status_code == 200) {
+    //         return response()->json(([
+    //             'success' => 1,
+    //             'redirectto' => $request,
+    //         ]));
+    //     } else {
+    //         return response()->json([
+    //             'message' => 'Payment verification failed.',
+    //             'response' => $response
+    //         ]);
+    //     }
+    // }
+
     public function khaltiverify(Request $request)
-    {
+{
+    $token = $request->token;
+    $amount = $request->amount;
 
-        $args = http_build_query(array(
-            'token' => $request->_token,
-            'amount'  => 1000
-        ));
+    $args = http_build_query([
+        'token' => $token,  // Use the Khalti token from request
+        'amount' => $amount,  // The payment amount in paisa (should match amount from the frontend)
+    ]);
 
-        $url = "https://khalti.com/api/v2/payment/verify/";
+    $url = "https://khalti.com/api/v2/payment/verify/";
 
-        # Make the call using API.
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-        $headers = ['Authorization: Key test_secret_key_56ee94c2db46440a9340fb8ec45cccc0'];
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    $headers = [
+        'Authorization: Key test_secret_key_56ee94c2db46440a9340fb8ec45cccc0'
+    ];
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        // Response
-        $response = curl_exec($ch);
-        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+    $response = curl_exec($ch);
+    $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
 
-        if ($status_code == 200) {
-            return response()->json(([
-                'success' => 1,
-                'redirectto' => $request,
-            ]));
+    if ($status_code == 200) {
+        $response_data = json_decode($response, true);
+
+        // If payment verification is successful
+        if (isset($response_data['state']) && $response_data['state'] === 'Complete') {
+            return response()->json([
+                'success' => true,
+                'redirectto' => url('/success-page') // Define your own success page route
+            ]);
         } else {
             return response()->json([
-                'message' => 'Something Went Wrong',
-                'response' => $response
+                'success' => false,
+                'message' => 'Payment verification failed.'
             ]);
         }
+    } else {
+        return response()->json([
+            'success' => false,
+            'message' => 'Error with Khalti API.',
+            'response' => $response
+        ]);
     }
+}
+
 
     public function testpay(Request $request){
 

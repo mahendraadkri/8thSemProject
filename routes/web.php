@@ -88,6 +88,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/mycart/store',[CartController::class,'store'])->name('cart.store');
     Route::post('/order/store',[OrderController::class,'store'])->name('order.store');
     Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
+    Route::post('/cart/clear',[CartController::class, 'clearCart'])->name('cart.clear');
     Route::get('/myorders',[PagesController::class,'orders'])->name('user.order');
     Route::get('/mywishlist',[WishlistController::class,'index'])->name('wishlist.index');
     Route::post('/mywishlist/store',[WishlistController::class,'store'])->name('wishlist.store');
@@ -117,7 +118,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/profileedit/{id}/update', [UserController::class, 'update'])->name('profileedit.update');
 
     //khalti
-    Route::post('/khaltiverified',[OrderController::class,'khaltiverified'])->name('khaltiverified');
+    Route::post('/khaltiverified',[OrderController::class,'khaltiverify'])->name('khaltiverified');
 });
 
 Route::middleware(['auth','isadmin'])->group(function () {
@@ -160,7 +161,9 @@ Route::middleware(['auth','isadmin'])->group(function () {
     //ratings
     Route::get('/rating',[UserRatingController::class,'ratings'])->name('rating.index');
 
-    Route::post('/update-rating-status', [UserRatingController::class, 'updateRatingStatus'])->name('rating.updateStatus');
+    Route::post('/update-rating-status', [UserRatingController::class, 'updateRatingStatus'])->name('ratingupdateStatus');
+    Route::post('/update-rating-status', [UserRatingController::class, 'updateRatingStatus'])->name('update.rating.status');
+
 
 
 

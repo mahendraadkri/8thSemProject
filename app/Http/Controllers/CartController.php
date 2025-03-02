@@ -115,4 +115,12 @@ class CartController extends Controller
        $categories = Category::orderBy('priority')->get();
        return view('checkout',compact('categories','itemsincart'));
     }
+    
+    public function clearCart()
+        {
+            Cart::where('user_id', auth()->user()->id)->where('is_ordered', false)->delete();
+
+            return back()->with('success', 'Cart cleared successfully');
+        }
+
 }

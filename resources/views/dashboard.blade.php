@@ -72,7 +72,16 @@
     <div class="min-h-screen text-gray-800 mt-8">
         <h2 class="font-bold text-4xl">Sells Record</h2>
         <hr class="h-1 bg-gray-600">
-        <canvas id="salesPieChart" width="400" height="400" style="width: 100px; height: 100px;"></canvas>
+
+        <div class="flex justify-between mt-6 space-x-8">
+            <div class="w-1/2">
+                <canvas id="salesPieChart"></canvas>
+            </div>
+            <div class="w-1/2">
+                <canvas id="salesBarChart"></canvas>
+            </div>
+        </div>
+        
     </div>
     
     
@@ -112,6 +121,42 @@
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+</script>
+
+<script>
+    var ctx = document.getElementById('salesBarChart').getContext('2d');
+    var categories = salesData.map(function(item) { return item.category_name; });
+    var totalSales = salesData.map(function(item) { return item.total_sales; });
+
+    var salesBarChart = new Chart(ctx, {
+        type: 'bar',  // Change to 'bar' for a bar chart
+        data: {
+            labels: categories,
+            datasets: [{
+                label: 'Sales by Category',
+                data: totalSales,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,  // Disable aspect ratio to allow custom sizing
+            scales: {
+                y: {
+                    beginAtZero: true,  // Ensure the y-axis starts at 0
+                }
+            }
         }
     });
 </script>

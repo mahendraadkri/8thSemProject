@@ -127,38 +127,81 @@ class ProductController extends Controller
         return $this->hasMany(Rating::class);
     }
 
-    public function sortProducts(Request $request, $category, $orderBy)
-    {
-        // Validate the orderBy value to avoid any potential security issues
-        $validOrderBy = ['asc', 'desc', 'new', 'old'];
-        if (!in_array($orderBy, $validOrderBy)) {
-            abort(400, 'Invalid sorting order.');
-        }
+    // public function sortProducts(Request $request, $orderBy,$categoryId)
+    // {
+    //     // Validate the orderBy value to avoid any potential security issues
+    //     $validOrderBy = ['asc', 'desc', 'new', 'old'];
+    //     if (!in_array($orderBy, $validOrderBy)) {
+    //         abort(400, 'Invalid sorting order.');
+    //     }
 
-        // Get the products for the specified category and apply sorting based on the orderBy value
-        $products = Product::where('category_id', $category);
+    //     // Fetch the category object based on the categoryId
+    //             $category = Category::find($categoryId);
+    //             if (!$category) {
+    //                 abort(404, 'Category not found.');
+    //             }
 
-        switch ($orderBy) {
-            case 'asc':
-                $products->orderBy('price', 'asc');
-                break;
-            case 'desc':
-                $products->orderBy('price', 'desc');
-                break;
-            case 'new':
-                $products->orderBy('created_at', 'desc');
-                break;
-            case 'old':
-                $products->orderBy('created_at', 'asc');
-                break;
-            default:
-                // Handle any other cases if needed
-                break;
-        }
+    //     // Get the products for the specified category and apply sorting based on the orderBy value
+    //     $products = Product::where('category_id', $category);
 
-        $products = $products->paginate(12); // Assuming 12 products per page, you can adjust this value as needed
+    //     switch ($orderBy) {
+    //         case 'asc':
+    //             $products->orderBy('price', 'asc');
+    //             break;
+    //         case 'desc':
+    //             $products->orderBy('price', 'desc');
+    //             break;
+    //         case 'new':
+    //             $products->orderBy('created_at', 'desc');
+    //             break;
+    //         case 'old':
+    //             $products->orderBy('created_at', 'asc');
+    //             break;
+    //         default:
+    //             // Handle any other cases if needed
+    //             break;
+    //     }
 
-        // Assuming you have a 'products' view to display the sorted products
-        return view('categoryproduct', ['products' => $products, 'category' => $category]);
+    //     $products = $products->paginate(12); // Assuming 12 products per page, you can adjust this value as needed
+
+    //     // Assuming you have a 'products' view to display the sorted products
+    //     return view('categoryproduct', ['products' => $products, 'category' => $category]);
+    // }
+
+    public function sortProducts(Request $request, $categoryId, $orderBy)
+{
+    $validOrderBy = ['asc', 'desc', 'low_to_high', 'high_to_low'];
+
+    if (!in_array($orderBy, $validOrderBy)) {
+        abort(400, 'Invalid sorting order.');
     }
+
+    $category = Category::find($categoryId);
+    if (!$category) {
+        abort(404, 'Category not found.');
+    }
+
+    // Fetch products for the category
+    $products = Product::where('category_id', $category->id);
+
+    switch ($orderBy) {
+        case 'asc':
+            $products = $products->orderBy('name', 'asc'); // Sorting by name ascending
+            break;
+        case 'desc':
+            $products = $products->orderBy('name', 'desc'); // Sorting by name descending
+            break;
+        case 'low_to_high':
+            $products = $products->orderBy('price', 'asc'); // Sorting by price low to high
+            break;
+        case 'high_to_low':
+            $products = $products->orderBy('price', 'desc'); // Sorting by price high to low
+            break;
+    }
+
+    $products = $products->paginate(12); // Paginate the results
+
+    return view('categoryproduct', ['products' => $products, 'category' => $category]);
+}
+
 }

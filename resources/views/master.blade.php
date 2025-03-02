@@ -25,7 +25,7 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @include('links.links')
 
-<script src="https://khalti.com/static/khalti-checkout.js"></script>
+
 
 
 </head>
@@ -37,14 +37,14 @@
     @if(auth()->user())
         <div class="flex flex-row items-center gap-4 relative">
             <button onclick="showdialog()">{{auth()->user()->name}}</button> 
-            <div class="absolute top-8 bg-green-400 p-4 " id="userdialog" style="display:none">
+            <div class="absolute top-8 bg-gray-400 p-4 " id="userdialog" style="display:none">
         
                 <p class="mb-4">
-                  <a href="myprofile" class="text-neutral-600 ">
+                  <a href="myprofile" class="text-neutral-900 ">
                     Profile</a>
                 </p>
                 <p class="mb-4">
-                  <a href="myorders" class="text-neutral-600">
+                  <a href="myorders" class="text-neutral-900">
                     My Order</a>
                 </p>
               
@@ -80,8 +80,7 @@
   <nav class="p-5 bg-gray-500 shadow md:flex md:items-center md:justify-between">
     <div class="flex justify-between items-center ">
       <span class="text-2xl font-[Poppins] cursor-pointer text-gray-200">
-        <img class="h-10 inline "
-          src="{{asset('images\logo.png')}}">
+        <img class="h-10 rounded-full inline "src="{{asset('images\logo.jpg')}}">
         Hamro Departmental Store
       </span>
       {{-- search --}}
@@ -493,7 +492,7 @@ class="bg-neutral-100 text-center text-neutral-600 dark:bg-gray-900 dark:text-ne
 
 <!--Copyright section-->
 <div class="bg-neutral-200 p-6 text-center dark:bg-neutral-700">
-  <span>© 2023 Copyright:</span>
+  <span>© 202 Copyright:</span>
  <p>Hamro Departmental Store</p>
 </div>
 </footer>

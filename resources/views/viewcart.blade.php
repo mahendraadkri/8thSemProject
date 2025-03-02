@@ -44,6 +44,12 @@
         <div class="mx-24 my-20">
             <a href="{{route('cart.checkout')}}" class="bg-blue-600 text-white px-10 py-5 rounded text-lg">Checkout</a>
         </div>
+        <div class="mx-24 ">
+          <form action="{{ route('cart.clear') }}" method="POST">
+              @csrf
+              <button type="submit" class="bg-red-600 text-white px-10 py-5 rounded text-lg">Clear</button>
+          </form>
+      </div>
       </div>
     </div>
   </div>
